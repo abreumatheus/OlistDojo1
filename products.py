@@ -19,7 +19,7 @@ class Product:
         return self.__name
 
     def set_price(self) -> None:
-        price = input('Enter the product price: ')
+        price = float(input('Enter the product price: '))
         self.__price = price
 
     def get_price(self) -> float:
@@ -31,3 +31,11 @@ class Product:
 
     def get_description(self) -> str:
         return self.__description
+
+    def __str__(self):
+        return f'''
+                    - SKU: {self.get_sku()} 
+                    - Name: {self.get_name()} 
+                    - Price: {self.get_price()} 
+                    - Description: {self.get_description()}
+                '''

@@ -17,10 +17,7 @@ def new_product() -> None:
 def list_products():
     print('\nList all products')
     for product in products:
-        print('SKU: ' + product.get_sku()
-              + ' - Name: ' + product.get_name()
-              + ' - Price: ' + str(product.get_price())
-              + ' - Description: ' + product.get_description())
+        print(product)
 
 
 def search_product(initial_product: str) -> Product:
@@ -35,10 +32,7 @@ def edit_product():
     if p is None:
         print('Product not found.')
     else:
-        print('SKU: ' + p.get_sku()
-              + ' - Name: ' + p.get_name()
-              + ' - Price: ' + str(p.get_price())
-              + ' - Description: ' + p.get_description())
+        print(p)
         p.set_name()
         p.set_price()
         p.set_description()
