@@ -1,6 +1,8 @@
 from products import Product
+from categories import Category, SubCategory
 
 products = []
+categories = []
 
 def valid_number(number: float) -> float:
     try:
@@ -10,6 +12,36 @@ def valid_number(number: float) -> float:
         number = valid_number(input('Number need to be a number: '))
     return number
 
+def new_category():
+    print('\nCreate new category')
+    
+    name = input("Enter the category name: ")
+    parent_name = input("(Optional) Enter the mother category name: ")
+    parent_category = search_category(parent_name)
+    new_id = 1 if not categories else categories[-1].get_id() + 1    
+
+    if parent_name and parent_category:
+        category = SubCategory(new_id,name,parent_category)
+        categories.append(category)
+    elif parent_name and not parent_category:
+        print("Category not found")
+        new_category()
+    else:
+        category = Category(new_id,name)
+        categories.append(category)
+    print("Success.")
+
+def search_category(name: str) -> Product:
+    for category in categories:
+        if category.get_name().lower() == name.lower():
+            return category
+
+def list_categories():
+    print('\nCategories: ')
+    
+    for c in categories:
+        print(c)
+    
 def new_product() -> None:
     print('\nCreate new product')
     
@@ -105,7 +137,8 @@ def edit_product():
 
 def menu():
     options = ['Cadastrar Produto', 'Editar Produto', 'Listar Produtos', 
-               'Buscar Produto por SKU', 'Deletar Produtos', 'Sair']
+               'Buscar Produto por SKU', 'Deletar Produtos', 'Cadastrar Categoria', 
+               'Listar Categorias', 'Sair']
 
     print('\nMENU: ')
 
@@ -130,7 +163,11 @@ while True:
         elif op == 5:
             delete_product()
         elif op == 6:
-            exit(1)
+            new_category()
+        elif op == 7:
+            list_categories()
+        elif op == 8:
+            exit(0)
         else:
             print('Opção indisponível. Tente novamente.')
     except ValueError:

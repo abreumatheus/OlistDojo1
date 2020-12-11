@@ -7,6 +7,13 @@ class Product:
     __lenght: float
     __width: float
     __description: str
+    __categories: list
+    
+    def get_categories(self) -> list:
+        return self.__categories
+    
+    def set_categories(self, category: str) -> None:
+        self.__categories.append(category)
 
     def set_sku(self, sku: str) -> None:
         self.__sku = sku
