@@ -1,32 +1,25 @@
-from products import Product
+class Category:
+    __id: int
+    __name: str
+    __id_mother: int # quando for 0 é mãe e quando for outro é referente a cat mãe
 
-p1 = Product()
-p1.set_sku()
-p1.set_name()
-p1.set_price()
-p1.set_description()
+    def set_id(self, id: int) -> None:
+        self.__id = int(id)
 
-p2 = Product()
-p2.set_sku()
-p2.set_name()
-p2.set_price()
-p2.set_description()
-produtos = [p1, p2]
+    def get_id(self) -> int:
+        return self.__id
 
-def busca(termo):
-    for p in produtos:
-        if p.get_sku() == termo:
-            return p
+    def set_name(self, name: str) -> None:
+        self.__name = name
 
-t = input('Digite um sku: ')
-n = busca(t)
-if n is None:
-    print('nao achooo')
-else:
-    print(n)
-    n.set_name()
-    n.set_price()
-    n.set_description()
-    for p in produtos:
-        print(p)
+    def get_name(self) -> str:
+        return self.__name
 
+    def set_id_mother(self, id_mother: int) -> None:
+        self.__id_mother = id_mother
+
+    def get_id_mother(self) -> int:
+        return self.__id_mother
+
+    def __str__(self):
+        pass

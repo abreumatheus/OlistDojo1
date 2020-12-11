@@ -1,8 +1,14 @@
 from products import Product
 
-
 products = []
 
+def valid_number(number: float) -> float:
+    try:
+        while float(number) <= 0:
+            number = float(input('Number must be bigger than 0, try again: '))
+    except ValueError:
+        number = valid_number(input('Number need to be a number: '))
+    return number
 
 def new_product() -> None:
     print('\nCreate new product')
@@ -22,7 +28,15 @@ def new_product() -> None:
     name = input('Product name: ')
     product.set_name(name)
     price = input('Product price: ')
-    product.set_price(price)
+    product.set_price(valid_number(price))
+    weight = input('Product weight: ')
+    product.set_weight(valid_number(weight))
+    height = input('Product height: ')
+    product.set_height(valid_number(height))
+    lenght = input('Product lenght: ')
+    product.set_lenght(valid_number(lenght))
+    width = input('Product width: ')
+    product.set_width(valid_number(width))
     description = input('Product description: ')
     product.set_description(description)
 
@@ -73,9 +87,20 @@ def edit_product():
     else:
         print(p)
         
-        p.set_name()
-        p.set_price()
-        p.set_description()
+        name = input('Product name: ')
+        p.set_name(name)
+        price = input('Product price: ')
+        p.set_price(valid_number(price))
+        weight = input('Product weight: ')
+        p.set_weight(valid_number(weight))
+        height = input('Product height: ')
+        p.set_height(valid_number(height))
+        lenght = input('Product lenght: ')
+        p.set_lenght(valid_number(lenght))
+        width = input('Product width: ')
+        p.set_width(valid_number(width))
+        description = input('Product description: ')
+        p.set_description(description)
 
 
 def menu():
