@@ -76,6 +76,10 @@ def new_product() -> None:
 
 
 def list_products():
+    print("Categories of Products Listed")
+    for c in categories:
+        print(c)
+    
     if len(products) > 0:
         print('\nList all products')
         for product in products:
