@@ -27,3 +27,4 @@ def valida_float(numero:float)->bool:
         return True
     raise ValueError(f'Valor informado {numero} não é float')
 
+

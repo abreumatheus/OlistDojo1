@@ -6,6 +6,6 @@ from calculadora import soma, subtracao, multiplicacao, divisao
         resultado = divisao(valor1, valor2)
         print(f"{resultado:.2f}") #__str__
     except ZeroDivisionError as e_z:
-        print('Erro de divisao por zero (culpa do outro dev)')
+        print('Erro de divisao por zero')
     except Exception as e:
-        print('Erro qualquer (Culpa minha)')
+        print('Erro qualquer')
