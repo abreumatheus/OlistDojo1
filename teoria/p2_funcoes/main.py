@@ -1,6 +1,11 @@
-from calculadora import soma
+from calculadora import soma, subtracao, multiplicacao, divisao
 
-valor1 = input('Digitar um numero: ')
-valor2 = input('Digitar um segundo numero: ')
-resultado = soma(valor1, valor2)
-print(f"{resultado:.2f}") #__str__
+    try:
+        valor1 = float(input('Digitar um numero: '))
+        valor2 = float(input('Digitar um segundo numero: '))
+        resultado = divisao(valor1, valor2)
+        print(f"{resultado:.2f}") #__str__
+    except ZeroDivisionError as e_z:
+        print('Erro de divisao por zero (culpa do outro dev)')
+    except Exception as e:
+        print('Erro qualquer (Culpa minha)')
