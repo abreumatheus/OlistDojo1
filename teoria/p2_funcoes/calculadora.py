@@ -1,3 +1,4 @@
+# soma, sub, mult, div
 def soma(numero1:float, numero2:float)->float:
     if valida_float(numero1) and valida_float(numero2) :   
         soma = numero1 + numero2
