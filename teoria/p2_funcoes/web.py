@@ -9,7 +9,11 @@ titulo_app = 'Calculadora Olist'
 
 @app.route('/')
 def index():
-    lista = ['somar', 'subtrair', 'multiplicar', 'dividir']
+    somar = {'nome':'somar', 'rota':'/somar' }
+    subtrair = {'nome':'subtrair', 'rota':'/subtrair' }
+    multiplicar = {'nome':'multiplicar', 'rota':'/multiplicar' }
+    dividir = {'nome':'dividir', 'rota':'/dividir' }
+    lista = [somar, subtrair, multiplicar, dividir]
     return render_template('index.html', nome=titulo_app, lista=lista )
 
 @app.route('/somar')
