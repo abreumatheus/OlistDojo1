@@ -1,0 +1,22 @@
+{% extends 'template.html' %}
+{% block corpo %}
+<ol> 
+    <li>
+        <a href='/somar'>Somar</a>
+    </li>
+    <li>
+        <a href='/subtrair'>Subtrair</a>
+    </li> 
+    <li>
+        <a href='/multiplicar'>Multiplicar</a>
+    </li> 
+    <li>
+        <a href='/dividir'>Dividir</a>
+    </li> 
+</ol>
+<ul>
+    {% for i in lista %}
+        <li>{{i}}</li>
+    {%  endfor %}
+</ul>
+{% endblock %}
