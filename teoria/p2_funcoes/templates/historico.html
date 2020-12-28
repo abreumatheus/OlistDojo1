@@ -1,0 +1,10 @@
+{% extends 'template.html' %}
+{% block corpo %} 
+
+    <h3>Historico de operações</h3>
+    <ul>
+    {% for i in lista %}
+        <li>{{i}}</li>
+    {% endfor %}
+    </ul>
+{% endblock %}

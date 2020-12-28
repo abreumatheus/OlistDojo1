@@ -1,6 +1,7 @@
 # pip3 install flask
 # which pip3 -  caminho da instalacao do pip3
 from flask import Flask, render_template
+from historico import ler_historico
 from calculadora import soma, subtracao, multiplicacao, divisao
 
 app = Flask(__name__)
@@ -13,7 +14,8 @@ def index():
     subtrair = {'nome':'subtrair', 'rota':'/subtrair' }
     multiplicar = {'nome':'multiplicar', 'rota':'/multiplicar' }
     dividir = {'nome':'dividir', 'rota':'/dividir' }
-    lista = [somar, subtrair, multiplicar, dividir]
+    historico = {'nome':'historico', 'rota':'/historico' }
+    lista = [somar, subtrair, multiplicar, dividir, historico]
     return render_template('index.html', nome=titulo_app, lista=lista )
 
 @app.route('/somar')
@@ -45,5 +47,9 @@ def dividir():
     resultado = f'{resultado:.2f}'
     return render_template('dividir.html',nome=titulo_app, resultado=resultado)
 
+@app.route('/historico') 
+def listar_historico():
+    lista_linhas = ler_historico()
+    return render_template('historico.html', lista = lista_linhas)
 app.run(debug=True)
 
