@@ -1,6 +1,6 @@
 # pip3 install flask
 # which pip3 -  caminho da instalacao do pip3
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from historico import ler_historico
 from calculadora import soma, subtracao, multiplicacao, divisao
 
@@ -14,9 +14,26 @@ def index():
     subtrair = {'nome':'subtrair', 'rota':'/subtrair' }
     multiplicar = {'nome':'multiplicar', 'rota':'/multiplicar' }
     dividir = {'nome':'dividir', 'rota':'/dividir' }
-    historico = {'nome':'historico', 'rota':'/historico' }
-    lista = [somar, subtrair, multiplicar, dividir, historico]
+    #historico = {'nome':'historico', 'rota':'/historico' }
+    lista = [somar, subtrair, multiplicar, dividir]#, historico]
     return render_template('index.html', nome=titulo_app, lista=lista )
+
+@app.route('/calcular')
+def calcular():
+    n1 = float(request.args.get('num1'))
+    n2 = float(request.args.get('num2'))
+    operacao = request.args.get('operacao')
+    if operacao == 'somar':
+        resultado = soma(n1, n2)
+    elif operacao == 'subtrair':
+        resultado = subtracao(n1, n2)
+    elif operacao == 'multiplicar':    
+        resultado = multiplicacao(n1, n2)
+    elif operacao == 'dividir':
+        resultado = divisao(n1, n2)
+    else:
+        return 'Operação invalida'
+    return f'O resultado da {operacao} entre {n1} e {n2} é {resultado}' 
 
 @app.route('/somar')
 def somar():
@@ -51,5 +68,6 @@ def dividir():
 def listar_historico():
     lista_linhas = ler_historico()
     return render_template('historico.html', lista = lista_linhas)
+
 app.run(debug=True)
 
