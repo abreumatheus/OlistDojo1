@@ -1,5 +1,5 @@
 # salvar
-caminho = 'teoria/p2_funcoes/historico.txt'
+caminho = 'teoria/p2_funcoes/logs/historico.txt'
 
 def salvar_historico(linha:str) -> None:
     arquivo = open(caminho,'a')

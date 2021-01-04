@@ -1,8 +1,13 @@
 # pip3 install flask
 # which pip3 -  caminho da instalacao do pip3
+import sys  
+sys.path.append('teoria/p2_funcoes')
+
+from back.historico import ler_historico
+from back.calculadora import soma, subtracao, multiplicacao, divisao
+from teste import funcao_teste
+
 from flask import Flask, render_template, request
-from historico import ler_historico
-from calculadora import soma, subtracao, multiplicacao, divisao
 
 app = Flask(__name__)
 
@@ -70,4 +75,3 @@ def listar_historico():
     return render_template('historico.html', lista = lista_linhas)
 
 app.run(debug=True)
-

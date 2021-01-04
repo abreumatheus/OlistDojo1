@@ -1,4 +1,4 @@
-from historico import salvar_historico
+from .historico import salvar_historico
 
 # soma, sub, mult, div
 def soma(numero1:float, numero2:float)->float:
