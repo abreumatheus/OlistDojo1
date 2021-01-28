@@ -3,17 +3,17 @@ from src.models.base_model import BaseModel
 from sqlalchemy.orm import relationship
 
 class Bet(BaseModel):
-    __tablename__ = 'bet'
-    name = Column('name', String(length=100), nullable=False)
-    description = Column('description', String(length=255), nullable=True)
-    customer_id = Column('customer_id', Integer, ForeignKey('customer.id') ) 
-    customer = relationship('customer')
-    match_id = 
-    match = 
-    team_id = 
-    team = 
-    value_bet = Column('value_bet', Float, nullable=True)
+    __tablename__ = 'BET'    
+    id_customer = Column('id_customer', Integer, ForeignKey('CUSTOMER.id') ) 
+    customer = relationship('CUSTOMER')
+    id_match = Column('id_match', Integer, ForeignKey('MATCHES.id') ) 
+    match = relationship('MATCHES')
+    id_team_sport = Column('id_team_sport', Integer, ForeignKey('TEAM_SPORT.id') ) 
+    team = relationship('TEAM_SPORT')
+    bet_value = Column('bet_value', Float, nullable=True)
 
-    def __init__(self,name:str, description:str) -> None:
-        self.name = name
-        self.description =  description
+    def __init__(self,id_customer: int, id_match: int, id_team_sport: int, bet_value: float) -> None:
+        self.id_customer = id_customer
+        self.id_match =  id_match
+        self.id_team_sport = id_team_sport
+        self.bet_value = bet_value
