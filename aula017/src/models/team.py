@@ -1,4 +1,7 @@
 import sys
+
+from src.utils.validators import validate_type, validate_not_empty, validate_len
+
 sys.path.append('.')
 from sqlalchemy import Column, String
 from sqlalchemy.orm import validates
@@ -10,24 +13,17 @@ class Team(BaseModel):
     name = Column('name', String(length=100), nullable=False)
     description = Column('description', String(length=255), nullable=True)
 
-    def __init__(self,name:str, description:str) -> None:
+    def __init__(self, name: str, description: str) -> None:
         self.name = name
-        self.description =  description
+        self.description = description
 
     @validates('name')
     def validate_name(self, key, name):
-        if not isinstance(name, str):
-            raise TypeError("Name isn't string")
-        if not name.strip(): # tanto '' quanto None
-            raise ValueError("Name can't be empty")
-        if len(name) > 100:
-            raise ValueError("Name can't be more than 100 characters")
-        return name
+        name = validate_type(name, str, key)
+        name = validate_not_empty(name, key)
+        return validate_len(name, 100, key)
 
     @validates('description')
     def validate_description(self, key, description):
-        if not isinstance(description, str):
-            raise TypeError("Description isn't string")
-        if len(description) > 255:
-            raise ValueError("Description can't be more than 255 characters")
-        return description
+        description = validate_type(description, str, key)
+        return validate_len(description, 255, key)
