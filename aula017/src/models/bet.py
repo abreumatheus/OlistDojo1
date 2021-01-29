@@ -9,11 +9,11 @@ from src.utils.validators import validate_type, validate_not_empty, validate_len
 class Bet(BaseModel):
     __tablename__ = 'BET'
     id_customer = Column('id_customer', Integer, ForeignKey('CUSTOMER.id'))
-    customer = relationship('CUSTOMER')
+    #customer = relationship('Customer')
     id_match = Column('id_match', Integer, ForeignKey('MATCHES.id'))
-    match = relationship('MATCHES')
+    #match = relationship('Match')
     id_team_sport = Column('id_team_sport', Integer, ForeignKey('TEAM_SPORT.id'))
-    team = relationship('TEAM_SPORT')
+    #team = relationship('TEAM_SPORT')
     bet_value = Column('bet_value', Float, nullable=True)
 
     def __init__(self, id_customer: int, id_match: int, id_team_sport: int, bet_value: float) -> None:
