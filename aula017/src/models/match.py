@@ -1,7 +1,10 @@
+from src.utils.validators import validate_not_empty, validate_type
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
+from sqlalchemy.sql.sqltypes import Date
 from src.models.base_model import BaseModel
 from datetime import datetime
+from sqlalchemy.orm import validates
 
 
 class Match(BaseModel):
@@ -24,3 +27,31 @@ class Match(BaseModel):
         self.match_date = match_date
         self.score_team_1 = score_team_1
         self.score_team_2 = score_team_2
+        
+    @validates('id_team_sport_1')
+    def validate_id_team_sport_1(self, key, id_team_sport_1):
+        id_team_sport_1 = validate_type(id_team_sport_1, int, key)
+        return id_team_sport_1
+
+    @validates('id_team_sport_2')
+    def validate_id_team_sport_2(self, key, id_team_sport_2):
+        id_team_sport_2 = validate_type(id_team_sport_2, int, key)
+        return id_team_sport_2
+
+    @validates('match_date')
+    def validate_match_date(self, key, match_date):
+        match_date = validate_type(match_date, datetime, key)
+        match_date = validate_not_empty(match_date, key)
+        return match_date
+
+    @validates('score_team_1')
+    def validate_score_team_1(self, key, score_team_1):
+        score_team_1 = validate_type(score_team_1, int, key)
+        score_team_1 = validate_not_empty(score_team_1, key)
+        return score_team_1        
+
+    @validates('score_team_2')
+    def validate_score_team_2(self, key, score_team_2):
+        score_team_2 = validate_type(score_team_2, int, key)
+        score_team_2 = validate_not_empty(score_team_2, key)
+        return score_team_2        
