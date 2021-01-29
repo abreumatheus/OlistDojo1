@@ -1,4 +1,7 @@
+import sys
+sys.path.append('.')
 from sqlalchemy import Column, String
+from sqlalchemy.orm import validates
 from src.models.base_model import BaseModel
 
 
@@ -10,3 +13,13 @@ class Team(BaseModel):
     def __init__(self,name:str, description:str) -> None:
         self.name = name
         self.description =  description
+
+    @validates('name')
+    def validate_name(self, key, name):
+        if not isinstance(name, str):
+            raise TypeError("Name isn't string")
+        if not name.strip(): # tanto '' quanto None
+            raise ValueError("Name can't be empty")
+        if len(name) > 100:
+            raise ValueError("Name can't be more than 100 characters")
+        return name
