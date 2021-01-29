@@ -23,3 +23,11 @@ class Team(BaseModel):
         if len(name) > 100:
             raise ValueError("Name can't be more than 100 characters")
         return name
+
+    @validates('description')
+    def validate_description(self, key, description):
+        if not isinstance(description, str):
+            raise TypeError("Description isn't string")
+        if len(description) > 255:
+            raise ValueError("Description can't be more than 255 characters")
+        return description
