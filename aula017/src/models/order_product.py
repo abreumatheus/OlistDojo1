@@ -4,6 +4,7 @@ from sqlalchemy.sql.schema import ForeignKey
 from src.models.base_model import BaseModel
 from src.utils.validators import validate_type
 from src.models.product import Product
+from src.models.order import Order
 
 
 class OrderProduct(BaseModel):
@@ -11,7 +12,7 @@ class OrderProduct(BaseModel):
 
     id_order = Column('id_order', Integer, ForeignKey(
         'PUB_ORDER.id'), nullable=False)
-    #pub_order = relationship('PubOrder', foreign_keys=[id_order])
+    pub_order = relationship('Order', foreign_keys=[id_order])
     id_product = Column('id_product', Integer,
                         ForeignKey('PRODUCT.id'), nullable=False)
     product = relationship('Product', foreign_keys=[id_product])
