@@ -9,12 +9,12 @@ from sqlalchemy.orm import validates
 
 class Match(BaseModel):
     __tablename__ = 'MATCHES'
-    id_team_sport_1 = Column('id_team_sport_1', Integer, nullable=False, 
-                            ForeignKey('TEAM_SPORT.id'))
-    team_sport_1 = relationship('TEAM_SPORT')
-    id_team_sport_2 = Column('id_team_sport_2', Integer, nullable=False, 
-                            ForeignKey('TEAM_SPORT.id'))
-    team_sport_2 = relationship('TEAM_SPORT')
+    id_team_sport_1 = Column('id_team_sport_1', Integer, 
+                            ForeignKey('TEAM_SPORT.id'), nullable=False)
+ #   team_sport_1 = relationship('TEAM_SPORT')
+    id_team_sport_2 = Column('id_team_sport_2', Integer, 
+                            ForeignKey('TEAM_SPORT.id'), nullable=False)
+ #   team_sport_2 = relationship('TEAM_SPORT')
     match_date = Column('match_date', DateTime , nullable=False)
     score_team_1 = Column('score_team_1', Integer , nullable=False)
     score_team_2 = Column('score_team_2', Integer , nullable=False)
@@ -30,28 +30,21 @@ class Match(BaseModel):
         
     @validates('id_team_sport_1')
     def validate_id_team_sport_1(self, key, id_team_sport_1):
-        id_team_sport_1 = validate_type(id_team_sport_1, int, key)
-        return id_team_sport_1
+        return validate_type(id_team_sport_1, int, key)
 
     @validates('id_team_sport_2')
     def validate_id_team_sport_2(self, key, id_team_sport_2):
-        id_team_sport_2 = validate_type(id_team_sport_2, int, key)
-        return id_team_sport_2
+        return validate_type(id_team_sport_2, int, key)
 
     @validates('match_date')
     def validate_match_date(self, key, match_date):
-        match_date = validate_type(match_date, datetime, key)
-        match_date = validate_not_empty(match_date, key)
-        return match_date
+        return validate_type(match_date, datetime, key)
 
     @validates('score_team_1')
     def validate_score_team_1(self, key, score_team_1):
-        score_team_1 = validate_type(score_team_1, int, key)
-        score_team_1 = validate_not_empty(score_team_1, key)
-        return score_team_1        
+        return validate_type(score_team_1, int, key)        
 
     @validates('score_team_2')
     def validate_score_team_2(self, key, score_team_2):
-        score_team_2 = validate_type(score_team_2, int, key)
-        score_team_2 = validate_not_empty(score_team_2, key)
-        return score_team_2        
+        return validate_type(score_team_2, int, key) 
+       
