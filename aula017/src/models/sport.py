@@ -6,7 +6,7 @@ from src.utils.validators import validate_type, validate_not_empty, validate_len
 
 
 class Sport(BaseModel):
-    __tablename__ = 'sport'
+    __tablename__ = 'SPORT'
     name = Column('name', String(length=100), nullable=False)
     description = Column('description', String(length=255), nullable=True)
 

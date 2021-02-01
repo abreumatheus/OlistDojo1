@@ -1,3 +1,4 @@
+from sqlalchemy.orm.relationships import foreign
 from src.utils.validators import validate_not_empty, validate_type
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey
 from sqlalchemy.orm import relationship
@@ -12,10 +13,10 @@ class Match(BaseModel):
     __tablename__ = 'MATCHES'
     id_team_sport_1 = Column('id_team_sport_1', Integer,
                              ForeignKey('TEAM_SPORT.id'), nullable=False)
-    team_sport_1 = relationship('TeamSport')
+    team_sport_1 = relationship('TeamSport', foreign_keys=[id_team_sport_1])
     id_team_sport_2 = Column('id_team_sport_2', Integer,
                              ForeignKey('TEAM_SPORT.id'), nullable=False)
-    team_sport_2 = relationship('TeamSport')
+    team_sport_2 = relationship('TeamSport', foreign_keys=[id_team_sport_2])
     match_date = Column('match_date', DateTime, nullable=False)
     score_team_1 = Column('score_team_1', Integer, nullable=False)
     score_team_2 = Column('score_team_2', Integer, nullable=False)
