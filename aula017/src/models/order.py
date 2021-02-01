@@ -1,5 +1,5 @@
 from sqlalchemy.orm.relationships import foreign
-from src.utils.validators import validate_not_empty, validate_type
+from src.utils.validators import validate_not_empty, validate_type, validate_be_greater_than_zero
 from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Float
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.sqltypes import Date
