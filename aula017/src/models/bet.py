@@ -1,19 +1,22 @@
+from src.models.team_sport import TeamSport
 from sqlalchemy import Column, Float, String, Integer, ForeignKey
 from src.models.base_model import BaseModel
 from sqlalchemy.orm import relationship
 from sqlalchemy.orm import validates
-
 from src.utils.validators import validate_type, validate_not_empty, validate_len, validate_be_greater_than_zero
+from src.models.customer import Customer
+from src.models.match import Match
 
 
 class Bet(BaseModel):
     __tablename__ = 'BET'
     id_customer = Column('id_customer', Integer, ForeignKey('CUSTOMER.id'))
-    #customer = relationship('Customer')
+    customer = relationship('Customer')
     id_match = Column('id_match', Integer, ForeignKey('MATCHES.id'))
-    #match = relationship('Match')
-    id_team_sport = Column('id_team_sport', Integer, ForeignKey('TEAM_SPORT.id'))
-    #team = relationship('TEAM_SPORT')
+    match = relationship('Match')
+    id_team_sport = Column('id_team_sport', Integer,
+                           ForeignKey('TEAM_SPORT.id'))
+    team = relationship('TeamSport')
     bet_value = Column('bet_value', Float, nullable=True)
 
     def __init__(self, id_customer: int, id_match: int, id_team_sport: int, bet_value: float) -> None:
