@@ -14,9 +14,12 @@ class BaseDao:
             return model
     
     def read_by_id(self, id_: int) -> BaseModel:
-        with Session() as session:
-            result = session.query(self.__type_model).filter_by(id_=id_).first()
-        return result
+        if isinstance(id_, int):
+            with Session() as session:
+                result = session.query(self.__type_model).filter_by(id_=id_).first()
+            return result
+        else:
+            raise TypeError('ID must be integer.')
     
     def read_all(self) -> list:
         with Session() as session:
