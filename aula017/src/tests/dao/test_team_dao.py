@@ -14,6 +14,7 @@ class TestTeamDao:
         team_saved = TeamDao().save(team)
 
         assert team_saved.id_ is not None
+        TeamDao().delete(team_saved)
 
     def test_not_save(self):
         with pytest.raises(UnmappedInstanceError):
@@ -25,6 +26,7 @@ class TestTeamDao:
         team_read = TeamDao().read_by_id(team_saved.id_)
 
         assert isinstance(team_read, Team)
+        TeamDao().delete(team_saved)
 
     def test_not_read_by_id(self):
         with pytest.raises(TypeError):
