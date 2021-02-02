@@ -4,9 +4,9 @@ from sqlalchemy import Column, String, Integer, DateTime, ForeignKey, Float
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.sqltypes import Date
 from src.models.base_model import BaseModel
+from src.models.customer import Customer
 from datetime import datetime
 from sqlalchemy.orm import validates
-
 
 
 class Order(BaseModel):
@@ -34,5 +34,5 @@ class Order(BaseModel):
 
     @validates('total_value')
     def validate_total_value(self, key, total_value):
-        total = validate_type(total_value, float, key)
+        total_value = validate_type(total_value, float, key)
         return validate_be_greater_than_zero(total_value, key)         
