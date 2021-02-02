@@ -13,12 +13,12 @@ class BaseDao:
     
     def read_by_id(self, id_: int) -> BaseModel:
         with Session() as session:
-            result = session.query(self.__type_model).filter_by(id_=id_).first()
+            result = session.query(self.__type_model).filter_by(idgi=id_).first()
         return result
     
     def read_all(self) -> list:
         with Session() as session:
-            result = session.query(self.__type_model).order_by('id_').all()
+            result = session.query(self.__type_model).order_by('id').all()
         return result
     
     def delete(self, model: BaseModel) -> None:
