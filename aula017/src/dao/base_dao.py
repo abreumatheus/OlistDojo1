@@ -10,6 +10,8 @@ class BaseDao:
         with Session() as session:
             session.add(model)
             session.commit()
+            session.refresh(model)
+            return model
     
     def read_by_id(self, id_: int) -> BaseModel:
         with Session() as session:
