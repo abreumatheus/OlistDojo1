@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 
 class Session:
     def __init__(self):
-        connector = 'mysql+mysqldb'
+        connector = 'mysql+pymysql'
         host = 'mysql09-farm15.uni5.net'
         user = 'topskills17'
         password = 'ButecoOlist21'
