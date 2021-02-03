@@ -18,7 +18,7 @@ class MatchController(BaseController):
         self.validate(model)
         return super().update(model)
 
-    def validate(model: Match) -> None:
+    def validate(self, model: Match) -> None:
         try:
             self.__team_controller.read_by_id(model.id_team_sport_1)
             self.__team_controller.read_by_id(model.id_team_sport_2)
