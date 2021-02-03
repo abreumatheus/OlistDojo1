@@ -1,3 +1,6 @@
+import sys
+sys.path.append('.')
+
 from sqlalchemy.orm.exc import UnmappedInstanceError
 from src.dao.team_sport_dao import TeamSportDao
 from src.models.team_sport import TeamSport
@@ -5,13 +8,17 @@ import pytest
 
 
 class TestTeamSportDao:
+    @pytest.fixture
+    def create_instance(self):
+        team_sport = TeamSport(1, 1)
+        return team_sport
+
     def test_instance(self):
         team_sport_dao = TeamSportDao()
         assert isinstance(team_sport_dao, TeamSportDao)
 
-    def test_save(self):
-        team_sport = TeamSport(1, 1)
-        team_sport_saved = TeamSportDao().save(team_sport)
+    def test_save(self, create_instance):
+        team_sport_saved = TeamSportDao().save(create_instance)
 
         assert team_sport_saved.id_ is not None
         TeamSportDao().delete(team_sport_saved)
@@ -20,9 +27,8 @@ class TestTeamSportDao:
         with pytest.raises(UnmappedInstanceError):
             team_sport_saved = TeamSportDao().save('team_sport')
 
-    def test_read_by_id(self):
-        team_sport = TeamSport(1, 1)
-        team_sport_saved = TeamSportDao().save(team_sport)
+    def test_read_by_id(self, create_instance):
+        team_sport_saved = TeamSportDao().save(create_instance)
         team_sport_read = TeamSportDao().read_by_id(team_sport_saved.id_)
 
         assert isinstance(team_sport_read, TeamSport)
@@ -37,9 +43,8 @@ class TestTeamSportDao:
 
         assert isinstance(team_sport_read, list)
 
-    def test_delete(self):
-        team_sport = TeamSport(1, 1)
-        team_sport_saved = TeamSportDao().save(team_sport)
+    def test_delete(self, create_instance):
+        team_sport_saved = TeamSportDao().save(create_instance)
         team_sport_read = TeamSportDao().read_by_id(team_sport_saved.id_)
         TeamSportDao().delete(team_sport_read)
         team_sport_read = TeamSportDao().read_by_id(team_sport_saved.id_)

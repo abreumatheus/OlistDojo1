@@ -5,13 +5,17 @@ import pytest
 
 
 class TestCustomerDao:
+    @pytest.fixture
+    def create_instance(self):
+        customer = Customer('Um nome', 'Documento', '16999999999')
+        return customer
+
     def test_instance(self):
         customer_dao = CustomerDao()
         assert isinstance(customer_dao, CustomerDao)
 
-    def test_save(self):
-        customer = Customer('Um nome', 'Documento', '16999999999')
-        customer_saved = CustomerDao().save(customer)
+    def test_save(self, create_instance):
+        customer_saved = CustomerDao().save(create_instance)
 
         assert customer_saved.id_ is not None
         CustomerDao().delete(customer_saved)
@@ -20,9 +24,8 @@ class TestCustomerDao:
         with pytest.raises(UnmappedInstanceError):
             CustomerDao().save('customer')
 
-    def test_read_by_id(self):
-        customer = Customer('Um nome', 'Documento', '16999999999')
-        customer_saved = CustomerDao().save(customer)
+    def test_read_by_id(self, create_instance):
+        customer_saved = CustomerDao().save(create_instance)
         customer_read = CustomerDao().read_by_id(customer_saved.id_)
 
         assert isinstance(customer_read, Customer)
@@ -36,9 +39,8 @@ class TestCustomerDao:
         customer_read = CustomerDao().read_all()
         assert isinstance(customer_read, list)
 
-    def test_delete(self):
-        customer = Customer('Um nome', 'Documento', '16999999999')
-        customer_saved = CustomerDao().save(customer)
+    def test_delete(self, create_instance):
+        customer_saved = CustomerDao().save(create_instance)
         customer_read = CustomerDao().read_by_id(customer_saved.id_)
         CustomerDao().delete(customer_read)
         customer_read = CustomerDao().read_by_id(customer_saved.id_)

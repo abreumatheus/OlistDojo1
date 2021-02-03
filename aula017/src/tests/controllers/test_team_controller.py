@@ -5,82 +5,81 @@ from src.controllers.team_controller import TeamController
 from src.models.team import Team
 
 
-def test_team_controller_instance():
+@pytest.fixture
+def create_instance():
     controller = TeamController()
+    return controller
 
-    assert isinstance(controller, BaseController)
-    assert isinstance(controller, TeamController)
+def test_team_controller_instance(create_instance):
+
+    assert isinstance(create_instance, BaseController)
+    assert isinstance(create_instance, TeamController)
 
 
-def test_read_all_should_return_list():
-    controller = TeamController()
+def test_read_all_should_return_list(create_instance):
 
-    result = controller.read_all()
+    result = create_instance.read_all()
 
     assert isinstance(result, list)
 
 
-def test_create_team():
-    controller = TeamController()
+def test_create_team(create_instance):
     name = 'Team'
     description = 'Test'
     team = Team(name, description)
 
-    result = controller.create(team)
+    result = create_instance.create(team)
 
     assert result.id_ is not None
     assert result.name == name
     assert result.description == description
 
-    controller.delete(result)
+    create_instance.delete(result)
 
 
-def test_update_team():
-    controller = TeamController()
+def test_update_team(create_instance):
     name = 'Team'
     description = 'Test'
     team = Team(name, description)
-    created = controller.create(team)
+    created = create_instance.create(team)
 
     created.name = 'Team 2'
     created.description = 'Test 2'
-    result = controller.update(created)
+    result = create_instance.update(created)
 
     assert result.id_ is not None
     assert result.name == 'Team 2'
     assert result.description == 'Test 2'
 
-    controller.delete(result)
+    create_instance.delete(result)
 
 
-def test_delete_team():
-    controller = TeamController()
+def test_delete_team(create_instance):
     name = 'Team'
     description = 'Test'
     team = Team(name, description)
-    created = controller.create(team)
+    created = create_instance.create(team)
 
-    controller.delete(created)
+    create_instance.delete(created)
 
     with pytest.raises(Exception) as exc:
-        controller.read_by_id(created.id_)
+        create_instance.read_by_id(created.id_)
         assert exc.value == 'Object not found in the database.'
 
 
-def test_read_by_id_should_return_team():
-    controller = TeamController()
+def test_read_by_id_should_return_team(create_instance):
     name = 'Team'
     description = 'Test'
     team = Team(name, description)
-    created = controller.create(team)
+    created = create_instance.create(team)
 
-    result = controller.read_by_id(created.id_)
+    result = create_instance.read_by_id(created.id_)
 
     assert isinstance(result, Team)
     assert result.name == name
     assert result.description == description
 
-    controller.delete(created)
+    create_instance.delete(created)
 
 
 def test_read_by_id_with_invalid_id_should_raise_exception():

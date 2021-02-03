@@ -6,13 +6,17 @@ import pytest
 
 
 class TestOrderDao:
+    @pytest.fixture
+    def create_instance(self):
+        order = Order(datetime.today(), 1, 10.2)
+        return order
+
     def test_instance(self):
         order_dao = OrderDao()
         assert isinstance(order_dao, OrderDao)
 
-    def test_save(self):
-        order = Order(datetime.today(), 1, 10.2)
-        order_saved = OrderDao().save(order)
+    def test_save(self, create_instance):
+        order_saved = OrderDao().save(create_instance)
 
         assert order_saved.id_ is not None
         OrderDao().delete(order_saved)
@@ -21,9 +25,8 @@ class TestOrderDao:
         with pytest.raises(UnmappedInstanceError):
             OrderDao().save('order')
 
-    def test_read_by_id(self):
-        order = Order(datetime.today(), 1, 10.2)
-        order_saved = OrderDao().save(order)
+    def test_read_by_id(self, create_instance):
+        order_saved = OrderDao().save(create_instance)
         order_read = OrderDao().read_by_id(order_saved.id_)
 
         assert isinstance(order_read, Order)
@@ -39,10 +42,9 @@ class TestOrderDao:
         assert isinstance(order_read, list)
         assert all(isinstance(item, Order) for item in order_read)
 
-    def test_delete(self):
-        order = Order(datetime.today(), 1, 10.2)
+    def test_delete(self, create_instance):
         dao = OrderDao()
-        order_saved = dao.save(order)
+        order_saved = dao.save(create_instance)
         order_read = dao.read_by_id(order_saved.id_)
         dao.delete(order_read)
         order_read = dao.read_by_id(order_saved.id_)

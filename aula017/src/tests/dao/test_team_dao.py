@@ -5,13 +5,17 @@ import pytest
 
 
 class TestTeamDao:
+    @pytest.fixture
+    def create_instance(self):
+        team = Team('Um nome', 'Uma descrição')
+        return team
+
     def test_instance(self):
         team_dao = TeamDao()
         assert isinstance(team_dao, TeamDao)
 
-    def test_save(self):
-        team = Team('Um nome', 'Uma descrição')
-        team_saved = TeamDao().save(team)
+    def test_save(self, create_instance):
+        team_saved = TeamDao().save(create_instance)
 
         assert team_saved.id_ is not None
         TeamDao().delete(team_saved)
@@ -20,9 +24,8 @@ class TestTeamDao:
         with pytest.raises(UnmappedInstanceError):
             team_saved = TeamDao().save('team')
 
-    def test_read_by_id(self):
-        team = Team('Um nome', 'Uma descrição')
-        team_saved = TeamDao().save(team)
+    def test_read_by_id(self, create_instance):
+        team_saved = TeamDao().save(create_instance)
         team_read = TeamDao().read_by_id(team_saved.id_)
 
         assert isinstance(team_read, Team)
@@ -37,9 +40,8 @@ class TestTeamDao:
 
         assert isinstance(team_read, list)
 
-    def test_delete(self):
-        team = Team('Um nome', 'Uma descrição')
-        team_saved = TeamDao().save(team)
+    def test_delete(self, create_instance):
+        team_saved = TeamDao().save(create_instance)
         team_read = TeamDao().read_by_id(team_saved.id_)
         TeamDao().delete(team_read)
         team_read = TeamDao().read_by_id(team_saved.id_)

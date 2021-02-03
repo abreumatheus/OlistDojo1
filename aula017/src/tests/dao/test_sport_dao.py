@@ -5,13 +5,17 @@ import pytest
 
 
 class TestSportDao:
+    @pytest.fixture
+    def create_instance(self):
+        sport = Sport('Um nome', 'Uma descrição')
+        return sport
+
     def test_instance(self):
         sport_dao = SportDao()
         assert isinstance(sport_dao, SportDao)
 
-    def test_save(self):
-        sport = Sport('Um nome', 'Uma descrição')
-        sport_saved = SportDao().save(sport)
+    def test_save(self, create_instance):
+        sport_saved = SportDao().save(create_instance)
 
         assert sport_saved.id_ is not None
         SportDao().delete(sport_saved)
@@ -20,9 +24,8 @@ class TestSportDao:
         with pytest.raises(UnmappedInstanceError):
             sport_saved = SportDao().save('sport')
 
-    def test_read_by_id(self):
-        sport = Sport('Um nome', 'Uma descrição')
-        sport_saved = SportDao().save(sport)
+    def test_read_by_id(self, create_instance):
+        sport_saved = SportDao().save(create_instance)
         sport_read = SportDao().read_by_id(sport_saved.id_)
 
         assert isinstance(sport_read, Sport)
@@ -37,9 +40,8 @@ class TestSportDao:
 
         assert isinstance(sport_read, list)
 
-    def test_delete(self):
-        sport = Sport('Um nome', 'Uma descrição')
-        sport_saved = SportDao().save(sport)
+    def test_delete(self, create_instance):
+        sport_saved = SportDao().save(create_instance)
         sport_read = SportDao().read_by_id(sport_saved.id_)
         SportDao().delete(sport_read)
         sport_read = SportDao().read_by_id(sport_saved.id_)
