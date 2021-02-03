@@ -1,33 +1,34 @@
 from src.models.sport import Sport
 import pytest
 
+class TestSportModel:
 
-def test_sport_instance():
-    sport = Sport('Esporte1', 'Esporte legal')
+    @pytest.fixture
+    def create_instance(self):
+        sport = Sport('Esporte1', 'Esporte legal')
+        return sport
 
-    assert isinstance(sport, Sport)
+    def test_sport_instance(self, create_instance):
+        assert isinstance(create_instance, Sport)
 
+    def test_sport_name_empty(self, create_instance):
+        with pytest.raises(ValueError):
+            create_instance.name = ''
 
-def test_sport_name_empty():
-    with pytest.raises(ValueError):
-        sport = Sport('', 'descrição')
+    def test_sport_name_len(self, create_instance):
+        with pytest.raises(ValueError):
+            create_instance.name = 'um nome bem grandão'*100
 
-
-def test_sport_name_len():
-    with pytest.raises(ValueError):
-        sport = Sport('um nome bem grandrão' * 100, 'descrição')
-
-
-def test_sport_name_int():
-    with pytest.raises(TypeError):
-        sport = Sport(100, 'descrição')
-
-
-def test_sport_description_len():
-    with pytest.raises(ValueError):
-        sport = Sport('Nome', 'descrição' * 500)
+    def test_sport_name_no_str(self, create_instance):
+        with pytest.raises(TypeError):
+            create_instance.name = 100
 
 
-def test_sport_description_int():
-    with pytest.raises(TypeError):
-        sport = Sport('Nome', 10)
+    def test_sport_description_len(self, create_instance):
+        with pytest.raises(ValueError):
+            create_instance.description = 'descrição'*500
+
+
+    def test_sport_description_no_string(self,create_instance):
+        with pytest.raises(TypeError):
+            create_instance.description = 10
