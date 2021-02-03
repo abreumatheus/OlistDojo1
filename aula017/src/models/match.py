@@ -13,10 +13,10 @@ class Match(BaseModel):
     __tablename__ = 'MATCHES'
     id_team_sport_1 = Column('id_team_sport_1', Integer,
                              ForeignKey('TEAM_SPORT.id'), nullable=False)
-    team_sport_1 = relationship('TeamSport', foreign_keys=[id_team_sport_1])
+    team_sport_1 = relationship('TeamSport', foreign_keys=[id_team_sport_1], lazy='subquery')
     id_team_sport_2 = Column('id_team_sport_2', Integer,
                              ForeignKey('TEAM_SPORT.id'), nullable=False)
-    team_sport_2 = relationship('TeamSport', foreign_keys=[id_team_sport_2])
+    team_sport_2 = relationship('TeamSport', foreign_keys=[id_team_sport_2], lazy='subquery')
     match_date = Column('match_date', DateTime, nullable=False)
     score_team_1 = Column('score_team_1', Integer, nullable=False)
     score_team_2 = Column('score_team_2', Integer, nullable=False)
@@ -36,6 +36,8 @@ class Match(BaseModel):
 
     @validates('id_team_sport_2')
     def validate_id_team_sport_2(self, key, id_team_sport_2):
+        if id_team_sport_2 == self.id_team_sport_1:
+            raise Exception("id_team_sport_1 can't be equal to id_team_sport_2.")
         return validate_type(id_team_sport_2, int, key)
 
     @validates('match_date')
