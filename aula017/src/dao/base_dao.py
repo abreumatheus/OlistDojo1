@@ -6,7 +6,7 @@ class BaseDao:
     def __init__(self, type_model):
         self.__type_model = type_model
         
-    def save(self, model: BaseModel) -> None:
+    def save(self, model: BaseModel) -> BaseModel:
         with Session() as session:
             session.add(model)
             session.commit()
