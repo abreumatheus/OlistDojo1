@@ -20,4 +20,9 @@ def customer():
     return render_template('customer.html')
 
 
+@app.route('/product')
+def product():
+    return render_template('product.html')
+
+
 app.run(debug=True)
