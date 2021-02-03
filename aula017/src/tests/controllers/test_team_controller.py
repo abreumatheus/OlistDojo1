@@ -10,6 +10,7 @@ def create_instance():
     controller = TeamController()
     return controller
 
+
 def test_team_controller_instance(create_instance):
 
     assert isinstance(create_instance, BaseController)
@@ -87,4 +88,4 @@ def test_read_by_id_with_invalid_id_should_raise_exception():
 
     with pytest.raises(Exception) as exc:
         controller.read_by_id(71289379)
-        assert exc.value == 'Object not found in the database.'
+    assert str(exc.value) == 'Object not found in the database.'
