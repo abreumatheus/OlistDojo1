@@ -1,3 +1,7 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 ul {
     display: flex;
     list-style: none;
@@ -7,12 +11,17 @@ ul {
 }
 
 a {
-    color: #ffffff;
+    color: rgb(41, 206, 49);
     font-family: Arial, Helvetica, sans-serif;
+}
+
+.menu li a {
+    color: white;
     padding: 3rem;
     margin: 0 auto;
     text-decoration: none;
 }
+
 
 td a {
     color: #000000;
@@ -49,4 +58,9 @@ td a {
 .team_list th{
     background-color: #0c29d0;
     color: #ffffff;
+
+td a, div.menu a, .action {
+    text-decoration: none;
+    color: #0c29d0;
+
 }
