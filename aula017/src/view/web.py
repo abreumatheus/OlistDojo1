@@ -1,7 +1,12 @@
+import sys
+sys.path.append('.')
+
 from flask import Flask, render_template, request, redirect
 
 from src.controllers.sport_controller import SportController
 from src.models.sport import Sport
+from src.controllers.team_controller import TeamController
+from src.models.team import Team
 
 app = Flask(__name__)
 
@@ -13,8 +18,21 @@ def home():
 
 @app.route('/team')
 def team():
-    return render_template('team.html')
+    team_list = TeamController().read_all()
+    return render_template('team.html', teams=team_list)
 
+@app.route('/team/create')
+def team_create_form():
+    return render_template('team_create.html')
+
+@app.route('/team', methods=['POST'])
+def team_create():
+    controller = TeamController()
+    name = request.form.get('name')
+    description = request.form.get('description')
+    new_team = Team(name, description)
+    controller.create(new_team)
+    return redirect('/team')
 
 @app.route('/sport')
 def sport():

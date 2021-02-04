@@ -1,4 +1,24 @@
 {% extends 'template.html'%}
 {% block body %}
-    Team
+    <a href="/team/create">Create Team</a>
+    <table>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+        </tr>
+        {% for team in teams %}
+        <tr>
+            <td>
+                {{ team.name }}
+            </td>
+            <td>
+                {{ team.description }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
