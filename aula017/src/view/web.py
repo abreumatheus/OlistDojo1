@@ -39,6 +39,25 @@ def team_create():
     controller.create(new_team)
     return redirect('/team')
 
+@app.route('/team/update/<int:id>')
+def team_update_form(id):
+    team = TeamController().read_by_id(id)
+    return render_template('team_update.html', team=team)
+
+@app.route('/team/update', methods=['POST'])
+def team_update():
+    update_team = TeamController().read_by_id(int(request.form.get('id')))
+    update_team.name = request.form.get('name')
+    update_team.description = request.form.get('description')
+    TeamController().update(update_team)
+    return redirect('/team')
+
+@app.route('/team/delete/<int:id>')
+def team_delete(id):
+    team = TeamController().read_by_id(id)
+    TeamController().delete(team)
+    return redirect('/team')
+
 @app.route('/sport')
 def sport():
     controller = SportController()
