@@ -8,6 +8,12 @@
             <th>
                 Description
             </th>
+            <th>
+                Delete
+            </th>
+            <th>
+                Update
+            </th>
         </tr>
         {% for sport in sports %}
         <tr>
@@ -17,6 +23,12 @@
             <td>
                 {{ sport.description }}
             </td>
+            <td>
+                <a href='/sport/delete?id={{sport.id_}}'> Delete</a>                
+            </td>
+            <td>
+                <a href='/sport/create?id={{sport.id_}}'> Update</a>                
+            </td>     
         </tr>
         {% endfor %}
     </table>

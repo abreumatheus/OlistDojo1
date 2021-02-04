@@ -1,4 +1,6 @@
 import sys
+
+from sqlalchemy.sql.expression import true, update
 sys.path.append('.')
 
 from flask import Flask, render_template, request, redirect
@@ -48,6 +50,12 @@ def sport():
 
 @app.route('/sport/create')
 def sport_create_form():
+    id_aux = request.args.get('id')
+    if id_aux:
+        controller = SportController()        
+        sport = controller.read_by_id(int(id_aux))
+        return render_template('sport_create.html', update=True, sport=sport)
+
     return render_template('sport_create.html')
 
 
@@ -61,6 +69,27 @@ def sport_create():
     return redirect('/sport')
 
 
+@app.route('/sport/update', methods=['POST'])
+def sport_update():
+    controller = SportController()
+    id_aux = int(request.form.get('id'))
+    name = request.form.get('name')
+    description = request.form.get('description')
+    sport = controller.read_by_id(id_aux)
+    sport.name = name
+    sport.description = description
+    controller.update(sport)
+    return redirect('/sport')
+
+@app.route('/sport/delete')
+def sport_delete():
+    controller = SportController()
+    id_aux = int(request.args.get('id'))
+    sport = controller.read_by_id(id_aux)
+    controller.delete(sport)
+    return redirect('/sport')
+
+ 
 @app.route('/product')
 def product():
     controller = ProductController()
