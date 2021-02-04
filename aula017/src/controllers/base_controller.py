@@ -4,13 +4,13 @@ from src.models.base_model import BaseModel
 
 class BaseController:
     def __init__(self, dao: BaseDao):
-        self.__dao = dao
+        self.__dao = dao()
 
     def read_all(self) -> list:
         return self.__dao.read_all()
 
-    def read_by_id(self, id: int) -> BaseModel:
-        result = self.__dao.read_by_id(id)
+    def read_by_id(self, id_: int) -> BaseModel:
+        result = self.__dao.read_by_id(id_)
         if result:
             return result
         raise Exception('Object not found in the database.')
