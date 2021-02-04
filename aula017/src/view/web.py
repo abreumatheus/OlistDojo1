@@ -86,8 +86,8 @@ def customer():
     list_customer = controller_customer.read_all()
     return render_template('customer.html', list_customer = list_customer)
 
-@app.route('/create_customer', methods=['GET','POST'])
-def create_customer():
+@app.route('/create_customer/<action>', methods=['GET','POST'])
+def create_customer(action):
     if request.form.get('name'):
         name = request.form.get('name')
         num_doc = request.form.get('identification')
@@ -97,5 +97,27 @@ def create_customer():
         controller_customer.create(customer)
         return redirect('/customer')
     return render_template('form_create_customer.html')
+
+@app.route('/delete_customer/<int:id_>')
+def delete_customer(id_):
+    controller_customer = CustomerController()
+    customer = controller_customer.read_by_id(id_)
+    controller_customer.delete(customer)
+    return redirect('/customer')
+
+@app.route('/update_customer/<int:id_>', methods=['GET', 'POST'])
+def update_customer(id_):
+    controller_customer = CustomerController()
+    customer = controller_customer.read_by_id(id_)
+    if request.method == 'POST':
+        name = request.form.get('name')
+        num_doc = request.form.get('identification')
+        phone = request.form.get('phone')
+        customer.name = name
+        customer.num_doc = num_doc
+        customer.phone = phone
+        controller_customer.update(customer)
+        return redirect('/customer')
+    return render_template('form_update_customer.html', customer = customer)
 
 app.run(debug=True)
