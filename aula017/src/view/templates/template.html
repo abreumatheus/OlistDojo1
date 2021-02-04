@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>olist</title>
 </head>
 <body>
+<ul>
     <li>
         <a href="/product">Product</a>
-        <a href="/sport">Sport</a>
-        <a href="/team">Team</a>
-        <a href="/customer">Customer</a>
-
     </li>
-    {% block body %}
-    
-    {% endblock %}
+    <li>
+        <a href="/sport">List Sports</a>
+        <a href="/sport/create">Create Sport</a>
+    </li>
+    <li>
+        <a href="/team">Team</a>
+    </li>
+    <li>
+        <a href="/customer">Customer</a>
+    </li>
+</ul>
+{% block body %}
+
+{% endblock %}
 </body>
 </html>
