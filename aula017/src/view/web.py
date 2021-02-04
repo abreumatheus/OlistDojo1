@@ -86,8 +86,8 @@ def customer():
     list_customer = controller_customer.read_all()
     return render_template('customer.html', list_customer = list_customer)
 
-@app.route('/create_customer/<action>', methods=['GET','POST'])
-def create_customer(action):
+@app.route('/create_customer', methods=['GET','POST'])
+def create_customer():
     if request.form.get('name'):
         name = request.form.get('name')
         num_doc = request.form.get('identification')
