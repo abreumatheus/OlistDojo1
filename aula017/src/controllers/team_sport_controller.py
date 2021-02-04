@@ -8,25 +8,28 @@ class TeamSportController(BaseController):
     def __init__(self):
         super().__init__(TeamSportDao)
 
-    def create(self, model: TeamSport) -> TeamSport:
-        sport_controller = SportController()
-        sport = sport_controller.read_by_id(model.id_sport)
-        team_controller = TeamController()
-        team = team_controller.read_by_id(model.id_team)
-        if sport and team:
-            dao = TeamSportDao()
-            return dao.save(model)
+    # def create(self, model: TeamSport) -> TeamSport:
+    #     sport_controller = SportController()
+    #     sport = sport_controller.read_by_id(model.id_sport)
+    #     team_controller = TeamController()
+    #     team = team_controller.read_by_id(model.id_team)
+    #     if sport and team:
+    #         dao = TeamSportDao()
+    #         return dao.save(model)
+    #     else:
+    #         raise Exception('erro ta aq')
         
     
-    def update(self, model: TeamSport) -> TeamSport:
-        sport_controller = SportController()
-        sport = sport_controller.read_by_id(model.id_sport)
-        team_controller = TeamController()
-        team = team_controller.read_by_id(model.id_team)
-        if sport and team:
-            dao = TeamSportDao()
-            dao.save(model)
-            return dao.save(model)
-            
+    # def update(self, model: TeamSport) -> TeamSport:
+    #     sport_controller = SportController()
+    #     sport = sport_controller.read_by_id(model.id_sport)
+    #     team_controller = TeamController()
+    #     team = team_controller.read_by_id(model.id_team)
+    #     if sport and team:
+    #         dao = TeamSportDao()
+    #         dao.save(model)
+    #         return dao.save(model)
+    #     else:
+    #         raise Exception('erro ta aq')
         
         
