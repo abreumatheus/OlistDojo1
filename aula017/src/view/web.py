@@ -5,9 +5,10 @@ from flask import Flask, render_template, request, redirect
 
 from src.controllers.sport_controller import SportController
 from src.controllers.product_controller import ProductController
+from src.controllers.customer_controller import CustomerController
 from src.models.sport import Sport
 from src.models.product import Product
-
+from src.models.customer import Customer
 app = Flask(__name__)
 
 
