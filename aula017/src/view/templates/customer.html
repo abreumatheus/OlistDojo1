@@ -18,8 +18,8 @@
                 <td>{{customer.num_doc}}</td>
                 <td>{{customer.phone}}</td>
                 <td>
-                    <a href="/delete_customer">Delete</a>
-                    <a href="update_customer">Update</a>
+                    <a style="color: red;" href="/delete_customer/{{customer.id_}}">Delete</a>
+                    <a style="color: blue;" href="/update_customer/{{customer.id_}}">Update</a>
                 </td>
             </tr>
             {% endfor %}
