@@ -1,4 +1,23 @@
-{% extends 'template.html'%}
+{% extends 'template.html' %}
 {% block body %}
-    Sport
+    <table>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+        </tr>
+        {% for sport in sports %}
+        <tr>
+            <td>
+                {{ sport.name }}
+            </td>
+            <td>
+                {{ sport.description }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
