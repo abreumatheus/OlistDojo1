@@ -1,4 +1,32 @@
 {% extends 'template.html'%}
+
 {% block body %}
-    Product
+    <h1>
+        Product
+    </h1>
+    <div class="menu">
+        <a href="/product/create">Create Product</a>
+    </div>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.description }}</td>
+                    <td>{{ product.price }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <a href="/">Back</a>
+
 {% endblock %}
