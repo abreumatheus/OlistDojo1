@@ -96,6 +96,23 @@ def product():
     product_list = controller.read_all()
     return render_template('product.html', products=product_list)
 
+@app.route('/product/update/', methods=['POST'])
+def update_product_post():
+    controller = ProductController()
+    id_ = request.form.get('id_')
+    product = controller.read_by_id(int(id_))
+    product.name = request.form.get('name')
+    product.description = request.form.get('description')
+    product.price = float(request.form.get('price'))
+    controller.update(product)
+    return redirect('/product')      
+
+
+@app.route('/product/update/<int:id>', methods=['GET'])
+def update_product_get(id):
+    product = ProductController().read_by_id(int(id))
+    return render_template('product_create.html', product=product, action = 'Update')
+
 
 @app.route('/product/create', methods=['POST', 'GET'])
 def create_product():
@@ -107,7 +124,15 @@ def create_product():
         new_product = Product(name, price, description)
         controller.create(new_product)
         return redirect('/product')       
-    return render_template('product_create.html')
+    return render_template('product_create.html', action = 'Create')
+
+
+@app.route('/product/delete/<int:id>')
+def delete_product(id):
+    product = ProductController().read_by_id(id)
+    ProductController().delete(product)
+    return redirect('/product')
+
 
 @app.route('/customer')
 def customer():

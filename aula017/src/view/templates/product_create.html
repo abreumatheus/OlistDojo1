@@ -1,12 +1,28 @@
 {% extends 'template.html' %}
 {% block body %}
+
+{% if action == 'Create' %}
     <form action="/product/create" method="post">
+    {% set id_ = '' %}
+    {% set name = '' %}
+    {% set description = ''  %}
+    {% set price = '' %}
+{% endif %}
+
+{% if action == 'Update' %}
+<form action="/product/update/{{product.id}}" method="post">
+    {% set id_ = product.id_ %}
+    {% set name = product.name %}
+    {% set description = product.description  %}
+    {% set price = product.price %}
+{% endif %}
+        <input type="text" name="id_" id="id_" value="{{id_}}" hidden>
         <label for="name">Name</label>
-        <input type="text" name="name" id="name">
+        <input type="text" name="name" id="name" value="{{name}}">
         <label for="description">Description</label>
-        <input type="text" name="description" id="description">
+        <input type="text" name="description" id="description" value="{{description}}">
         <label for="price">Price</label>
-        <input type="number" name="price" id="price">
+        <input type="number" step="0.01" name="price" id="price" value="{{price}}">
         <button type="submit">Create</button>
     </form>
 {% endblock %}
