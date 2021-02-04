@@ -30,14 +30,14 @@ class TestTeamSportController:
     def test_team_sport_not_create_obj_not_found(self):
         team_sport = TeamSport(99999999, 1)
         with pytest.raises(Exception) as exc:
-            create = TeamSportController().create(team_sport)
+            TeamSportController().create(team_sport)
             assert exc.value == "Object not found in the database."
 
     def test_team_sport_delete(self, create_team_sport):
         create = TeamSportController().create(create_team_sport)
         TeamSportController().delete(create)
         with pytest.raises(Exception):
-            read = TeamSportController().read_by_id(create.id_)
+            TeamSportController().read_by_id(create.id_)
 
     def test_team_sport_create(self, create_team_sport):
         create = TeamSportController().create(create_team_sport)
@@ -47,7 +47,7 @@ class TestTeamSportController:
 
     def test_team_sport_not_create(self):
         with pytest.raises(Exception):
-            create = TeamSportController().create('error')
+            TeamSportController().create('error')
 
     def test_team_sport_update(self, create_team_sport):
         create = TeamSportController().create(create_team_sport)
@@ -60,4 +60,4 @@ class TestTeamSportController:
 
     def test_team_sport_not_update(self):
         with pytest.raises(Exception):
-            create = TeamSportController().update('error')
+            TeamSportController().update('error')

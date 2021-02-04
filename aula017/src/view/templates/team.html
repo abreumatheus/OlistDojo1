@@ -1,24 +1,31 @@
 {% extends 'template.html'%}
 {% block body %}
-    <a href="/team/create">Create Team</a>
-    <table>
-        <tr>
-            <th>
-                Name
-            </th>
-            <th>
-                Description
-            </th>
-        </tr>
-        {% for team in teams %}
-        <tr>
-            <td>
-                {{ team.name }}
-            </td>
-            <td>
-                {{ team.description }}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+    <div class="team_list">
+        <button type="button"> <a class='button_' href="/team/create">Create Team</a> </button>
+        <table>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th></th>
+            </tr>
+            {% for team in teams %}
+            <tr>
+                <td>
+                    {{ team.name }}
+                </td>
+                <td>
+                    {{ team.description }}
+                </td>
+                <td>
+                    <button type="button" onclick="window.location.href='/team/update/{{team.id_}}'">Update</button>
+                    <button type="button" onclick="window.location.href='/team/delete/{{team.id_}}'">Delete</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}
