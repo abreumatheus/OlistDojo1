@@ -31,9 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 PROJECT_APPS = [
-    'product'
+    'product',
+    'seller'
 ]
-
 
 
 INSTALLED_APPS = [
