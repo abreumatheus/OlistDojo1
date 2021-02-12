@@ -32,7 +32,8 @@ ALLOWED_HOSTS = []
 
 PROJECT_APPS = [
     'product',
-    'seller'
+    'seller',
+    'channel'
 ]
 
 
