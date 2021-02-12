@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3c82e016-0942-46aa-a52c-e997a8e3fcdc" name="Default Changelist" comment="" />
+    <list default="true" id="3c82e016-0942-46aa-a52c-e997a8e3fcdc" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/dojo_22_01_21/backend/controller/product_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/dojo_22_01_21/backend/controller/product_controller.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -17,6 +19,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunManager">
