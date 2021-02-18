@@ -17,9 +17,9 @@ class Product(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     category = models.ManyToManyField(Category)
-    seller = models.ForeignKey(Seller, on_delete=models.RESTRICT, null=True)
+    seller = models.ForeignKey(Seller, on_delete=models.RESTRICT, null=False)
 
     def __str__(self):
-        return f'{self.name} {self.description} {self.price}'
+        return f'{self.name} {self.description} {self.price} {self.seller}'
 
 
