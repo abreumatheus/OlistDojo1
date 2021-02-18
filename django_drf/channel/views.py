@@ -1,8 +1,8 @@
-from django.shortcuts import render
-from rest_framework import viewsets, permissions
-from .serializers import ChannelSerializer
-from .models import Channel
 from django.http import HttpResponse
+from rest_framework import viewsets, permissions
+
+from .models import Channel
+from .serializers import ChannelSerializer
 
 
 def index(request):
